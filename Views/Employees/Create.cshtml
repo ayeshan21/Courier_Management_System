@@ -1,89 +1,91 @@
 ﻿@model Courier_Management_System.DATA_MODEL.Employee
 
 @{
-    ViewData["Title"] = "Create";
+	ViewData["Title"] = "Create";
 }
 
 <h2>Create Employee</h2>
 <hr />
 <div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" id="name" />
-                <span asp-validation-for="Name" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Address" class="control-label"></label>
-                <input asp-for="Address" class="form-control" id="address" />
-                <span asp-validation-for="Address" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Phone" class="control-label"></label>
-                <input asp-for="Phone" class="form-control" id="phone"/>
-                <span asp-validation-for="Phone" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="NID" class="control-label"></label>
-                <input asp-for="NID" class="form-control" id="n-id"/>
-                <span asp-validation-for="NID" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="EID" class="control-label"></label>
-                <input asp-for="EID" class="form-control"id="e-id">
-                <span asp-validation-for="EID" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <button class="btn btn-primary" id="create-btn">Create</button>
-            </div>
-        </form>
-    </div>
+	<div class="col-md-4">
+		<form asp-action="Create">
+			<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+			<div class="form-group">
+				<label asp-for="Name" class="control-label"></label>
+				<input asp-for="Name" class="form-control" id="name" />
+				<span asp-validation-for="Name" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="Address" class="control-label"></label>
+				<input asp-for="Address" class="form-control" id="address" />
+				<span asp-validation-for="Address" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="Phone" class="control-label"></label>
+				<input asp-for="Phone" class="form-control" id="phone" />
+				<span asp-validation-for="Phone" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="NID" class="control-label"></label>
+				<input asp-for="NID" class="form-control" id="n-id" />
+				<span asp-validation-for="NID" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<label asp-for="EID" class="control-label"></label>
+				<input asp-for="EID" class="form-control" id="e-id">
+				<span asp-validation-for="EID" class="text-danger"></span>
+			</div>
+			<div class="form-group">
+				<button class="btn btn-primary" id="create-btn">Create</button>
+			</div>
+		</form>
+	</div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+	<a asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-    <script>
-   
-      $(document).ready(function(){
-            $("#create-btn").click(function(){
+	@{
+		await Html.RenderPartialAsync("_ValidationScriptsPartial");
+	}
+	<script>
 
-                alert(
-                    Swal.fire({
-                    title: "Drag me!",
-                    icon: "success",
-                    draggable: true
-                    });
-                )
-               var formdata= new FormData()
-               {
-                       Name=$("#name").val();
-                       Address=$("#address").val();
-                       Phone=$("phone").val();
-                       NID=$("#n-id").val();
-                       EID=$("#e-id").val();
-               }
-               $.ajax({
-                   url:"/Employees/Create",
-                   type:"POST",
-                   data:formdata,
-                   success: function(response){
-                       if(response.success)
-                       {
-                           alert(response.msg);
-                       }
-                       else{
-                           alert();
-                       }
-                   }
+		$(document).ready(function(){
+			  $("#create-btn").click(function(){
 
-               })
-            }) 
-      })
-    </script>
+
+				 var formdata= new FormData()
+				 {
+						 Name=$("#name").val();
+						 Address=$("#address").val();
+						 Phone=$("phone").val();
+						 NID=$("#n-id").val();
+						 EID=$("#e-id").val();
+				 }
+				 $.ajax({
+					 url:"/Employees/Create",
+					 type:"POST",
+					 data:formdata,
+					 success: function(response){
+						 if(response.success)
+						 {
+							 alert(
+								  Swal.fire({
+								  title: "Drag me!",
+								  icon: "success",
+								  draggable: true
+						          });
+					
+						 }
+						 else{
+							 alert("Error");
+						 }
+					 }
+
+				 })
+			  })
+		})
+	</script>
 }

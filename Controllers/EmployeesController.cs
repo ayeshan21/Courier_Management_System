@@ -27,7 +27,7 @@ namespace Courier_Management_System.Controllers
             return View(await _context.Employee.ToListAsync());
         }
 
-   
+
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -45,31 +45,32 @@ namespace Courier_Management_System.Controllers
             return View(employee);
         }
 
-     
+
         public IActionResult Create()
         {
+
             return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([ Bind("Id,Name,Address,Phone,NID,EID")] Employee employee)
+        public async Task<IActionResult> Create([Bind("Id,Name,Address,Phone,NID,EID")]Employee employee)
         {
             if (employee == null)
             {
                 return BadRequest("error");
             }
-            Employee data = new Employee();
+            Employee data = new Employee()
             {
-                    Name = employee.Name;
-                    Address= employee.Address,
-                    Phone= employee.Phone,
-                    NID= employee.NID,
-                    EID= employee.EID,
+                Name = employee.Name,
+                Address = employee.Address,
+                Phone = employee.Phone,
+                NID = employee.NID,
+                EID = employee.EID,
             };
             _context.Employee.Add(data);
             _context.SaveChanges();
-            return Json(new { success = true, msg = "Work Done" });
+            return Json(new { success = false });
         }
 
         // GET: Employees/Edit/5
@@ -123,7 +124,6 @@ namespace Courier_Management_System.Controllers
             return View(employee);
         }
 
-        // GET: Employees/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -141,7 +141,7 @@ namespace Courier_Management_System.Controllers
             return View(employee);
         }
 
-        // POST: Employees/Delete/5
+      
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int? id)
