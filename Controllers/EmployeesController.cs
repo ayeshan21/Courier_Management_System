@@ -51,24 +51,30 @@ namespace Courier_Management_System.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Address,Phone,NID,EID")]Employee employee)
+        public async Task<IActionResult> Create(Employee employee)
         {
             if (employee == null)
             {
-                return BadRequest("error");
+                return BadRequest("Something went wrong");
             }
-            Employee data = new Employee()
+            try
             {
-                Name = employee.Name,
-                Address = employee.Address,
-                Phone = employee.Phone,
-                NID = employee.NID,
-                EID = employee.EID,
-            };
-            _context.Employee.Add(data);
-            _context.SaveChanges();
-            return Json(new { success = false });
+                Employee data = new Employee();
+
+                data.Name = employee.Name;
+                data.Address = employee.Address;
+                data.Phone = employee.Phone;
+                data.NID = employee.NID;
+                data.EID = employee.EID;
+
+                _context.Employee.Add(data);
+                await _context.SaveChangesAsync();
+                return Json(true);
+            }
+            catch
+            {
+                return Json(true);
+            }
         }
 
         public async Task<IActionResult> Edit(int? id)

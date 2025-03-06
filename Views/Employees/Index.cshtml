@@ -48,16 +48,16 @@
             <td>
                 @Html.DisplayFor(modelItem => item.EID)
             </td>
-            <td>
-                <button class="btn btn-primary text-white">
+            <td class="text-white">
+                <button class="btn btn-primary">
                         <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
                 </button>
                  |    
-                <button class="btn btn-secondary text-white">
+                <button class="btn btn-secondary">
                         <a asp-action="Details" asp-route-id="@item.Id">Details</a>
                 </button>
                  |                    
-                <button class="btn btn-danger text-white">
+                <button class="btn btn-danger">
                         <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
                 </button>     
             </td>
