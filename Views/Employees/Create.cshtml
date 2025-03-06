@@ -1,5 +1,4 @@
 ﻿@model Courier_Management_System.DATA_MODEL.Employee
-
  
 @{
 	ViewData["Title"] = "Create";
@@ -58,8 +57,8 @@
 	<script>
 
 		$(document).ready(function(){
-			  $("#create-btn").click(function(){
-				 // Prevent form from submitting traditionally
+			  $("#create-btn").click(function(event){
+                 event.preventDefault();
 
 				 var formdata= new FormData();
 
@@ -83,7 +82,7 @@
 							text: "Employee added successfully!",
 							icon: "success",
 							draggable: true,
-						    });
+						    }).then(()=>{window.location.href="/Employees/Index"});
 						 }
 						 else{
 								Swal.fire({

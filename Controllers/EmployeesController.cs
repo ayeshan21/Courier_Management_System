@@ -20,14 +20,10 @@ namespace Courier_Management_System.Controllers
         {
             _context = context;
         }
-
-
         public async Task<IActionResult> Index()
         {
             return View(await _context.Employee.ToListAsync());
         }
-
-
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -57,8 +53,7 @@ namespace Courier_Management_System.Controllers
             {
                 return BadRequest("Something went wrong");
             }
-            try
-            {
+
                 Employee data = new Employee();
 
                 data.Name = employee.Name;
@@ -70,11 +65,6 @@ namespace Courier_Management_System.Controllers
                 _context.Employee.Add(data);
                 await _context.SaveChangesAsync();
                 return Json(true);
-            }
-            catch
-            {
-                return Json(true);
-            }
         }
 
         public async Task<IActionResult> Edit(int? id)

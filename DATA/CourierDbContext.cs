@@ -13,7 +13,6 @@ namespace Courier_Management_System.Data
             : base(options)
         {
         }
-
         public DbSet<Employee> Employee { get; set; } = default!;
     }
 }
